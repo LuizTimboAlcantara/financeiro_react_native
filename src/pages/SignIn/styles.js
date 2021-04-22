@@ -52,5 +52,6 @@ export const Link = styled.TouchableOpacity`
 `;
 
 export const LinkText = styled.Text`
+  margin-top: 30px;
   color: #fff;
 `;
