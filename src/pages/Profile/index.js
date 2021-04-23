@@ -3,6 +3,8 @@ import { useNavigation } from "@react-navigation/native";
 
 import { AuthContext } from "../../contexts/auth";
 
+import Header from "../../components/Header";
+
 import { Container, Nome, NewLink, NewText, Logout, LogoutText } from "./styles";
 
 export default function Profile() {
@@ -11,6 +13,7 @@ export default function Profile() {
 
   return (
     <Container>
+      <Header />
       <Nome>{user && user.nome}</Nome>
       <NewLink
         onPress={() => {
