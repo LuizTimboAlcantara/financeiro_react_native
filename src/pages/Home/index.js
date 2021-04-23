@@ -19,13 +19,13 @@ export default function Home() {
     { key: "8", tipo: "receita", valor: 89.62 },
   ]);
 
-  const { user, signOut } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <Background>
       <Header />
       <Container>
-        <Nome>Luiz</Nome>
+        <Nome>{user && user.nome}</Nome>
         <Saldo>R$ 123,00</Saldo>
       </Container>
 
