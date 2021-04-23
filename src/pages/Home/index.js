@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Alert } from "react-native";
 import firebase from "../../services/firebaseConnection";
-import { format } from "date-fns";
+import { format, isPast } from "date-fns";
 
 import { AuthContext } from "../../contexts/auth";
 
@@ -41,6 +42,7 @@ export default function Home() {
               key: childItem.key,
               tipo: childItem.val().tipo,
               valor: childItem.val().valor,
+              date: childItem.val().date,
             };
 
             setHistorico((oldArray) => [...oldArray, list].reverse());
@@ -50,6 +52,49 @@ export default function Home() {
 
     loadList();
   }, []);
+
+  function handleDelete(data) {
+    if (isPast(new Date(data.date))) {
+      alert("Você não pode deletar um registro passado.");
+      return;
+    }
+
+    Alert.alert(
+      "Você tem certeza que quer deletar esse registro?",
+      `${data.tipo} - ${data.valor}?`,
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Confirmar",
+          onPress: () => handleDeleteSuccess(data),
+        },
+      ]
+    );
+  }
+
+  async function handleDeleteSuccess(data) {
+    await firebase
+      .database()
+      .ref("historico")
+      .child(uid)
+      .child(data.key)
+      .remove()
+      .then(async () => {
+        let saldoAtual = saldo;
+
+        data.tipo === "despesa"
+          ? (saldoAtual += parseFloat(data.valor))
+          : (saldoAtual -= parseFloat(data.valor));
+
+        await firebase.database().ref("users").child(uid).child("saldo").set(saldoAtual);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }
 
   return (
     <Background>
@@ -65,7 +110,7 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
         data={historico}
         keyExtractor={(item) => item.key}
-        renderItem={({ item }) => <HistoricoList data={item} />}
+        renderItem={({ item }) => <HistoricoList data={item} deleteItem={handleDelete} />}
       />
     </Background>
   );
