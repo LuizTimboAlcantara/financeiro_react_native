@@ -46,7 +46,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias?
 
 # Configurações
   $ É necessário ter o Android Studio ou XCode corretamente configurado assim como um simulador ou 
-  dispositivo configurado para simular a aplicação.
+     dispositivo configurado para simular a aplicação.
 
 # Rodar a aplicação
   $ Android: npx react-native run-android
