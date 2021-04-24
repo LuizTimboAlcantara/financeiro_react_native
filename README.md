@@ -3,7 +3,7 @@
   <Strong>Controle Financeiro</Strong>
  </h1>
 
-<h1>
+<h1 align="center">
   <img src="src/assets/aplicacao.gif" />
 <h1>
 
