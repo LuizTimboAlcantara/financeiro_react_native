@@ -39,13 +39,14 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias?
   $ git clone https://github.com/LuizTimboAlcantara/financeiro_react_native
 
 # Entrar na pasta do projeto
-  $ financeiro_react_native
+  $ cd financeiro_react_native
 
 # Instalar as dependências do projeto
   $ npm install
 
 # Configurações
-  $ É necessário ter o Android Studio ou XCode corretamente configurado assim como um simulador ou dispositivo configurado para simular a aplicação.
+  $ É necessário ter o Android Studio ou XCode corretamente configurado assim como um simulador ou 
+  dispositivo configurado para simular a aplicação.
 
 # Rodar a aplicação
   $ Android: npx react-native run-android
